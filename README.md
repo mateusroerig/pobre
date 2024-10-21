@@ -31,7 +31,16 @@ Plataforma financeira para controle de gastos pessoais.
 
 ## Configuração
 
-1. **Crie as migrações e banco de dados**:
+1. **Crie um arquivo `.env` utilizando o `.env.example` como base**:
+
+    Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis de ambiente:
+
+    ```properties
+    DATABASE_USER=usuario_do_banco
+    DATABASE_PASSWORD=senha_do_banco
+    ```
+
+2. **Crie as migrações e banco de dados**:
 
     Execute o comando para criar o banco de dados e aplicar as migrações iniciais:
 
@@ -39,7 +48,7 @@ Plataforma financeira para controle de gastos pessoais.
     python manage.py migrate
     ```
 
-2. **Crie um superusuário** (para poder acessar a área administrativa e testar o login):
+3. **Crie um superusuário** (para poder acessar a área administrativa e testar o login):
 
     ```bash
     python manage.py createsuperuser
