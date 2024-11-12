@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'pobre.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pobre_database',
+        'NAME': 'pobre_db',
         'USER': str(os.getenv('DATABASE_USER')),
         'PASSWORD': str(os.getenv('DATABASE_PASSWORD')),
         'HOST': '127.0.0.1',
@@ -134,3 +134,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+AUTH_USER_MODEL = 'accounts.Usuario'
