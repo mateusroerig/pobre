@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Atualizar Dados{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Atualizar Dados</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="id_nome" class="form-label">Nome Completo</label>
+                            <input type="text" name="nome" class="form-control {% if form.nome.errors %}is-invalid{% endif %}" id="id_nome" value="{{ form.nome.value }}">
+                            {% if form.nome.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.nome.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">E-mail</label>
+                            <input type="email" name="email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" id="id_email" value="{{ form.email.value }}">
+                            {% if form.email.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="id_cpf" class="form-label">CPF</label>
+                            <input type="text" name="cpf" class="form-control {% if form.cpf.errors %}is-invalid{% endif %}" id="id_cpf" value="{{ form.cpf.value }}">
+                            {% if form.cpf.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.cpf.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="id_data_nascimento" class="form-label">Data de Nascimento</label>
+                            <input type="date" name="data_nascimento" class="form-control {% if form.data_nascimento.errors %}is-invalid{% endif %}" id="id_data_nascimento" value="{{ form.data_nascimento.value }}">
+                            {% if form.data_nascimento.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.data_nascimento.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="id_cargo" class="form-label">Cargo</label>
+                            <input type="text" name="cargo" class="form-control {% if form.cargo.errors %}is-invalid{% endif %}" id="id_cargo" value="{{ form.cargo.value }}">
+                            {% if form.cargo.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.cargo.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_perfil_investidor" class="form-label">Perfil de Investidor</label>
+                            {{ form.perfil_investidor }}
+                            {% if form.perfil_investidor.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.perfil_investidor.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <a href="{% url 'home' %}" class="btn btn-outline-secondary w-100">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

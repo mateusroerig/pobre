@@ -20,3 +20,17 @@ class UsuarioCreationForm(UserCreationForm):
         if Usuario.objects.filter(cpf=cpf).exists():
             raise forms.ValidationError("Este CPF já está cadastrado.")
         return cpf
+
+class UsuarioUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['nome', 'email', 'cpf', 'data_nascimento', 'cargo', 'perfil_investidor']
+        widgets = {
+            'data_nascimento': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if Usuario.objects.exclude(pk=self.instance.pk).filter(email=email).exists():
+            raise forms.ValidationError("Este e-mail já está em uso.")
+        return email
