@@ -15,7 +15,7 @@
                         
                         <div class="mb-3">
                             <label for="id_username" class="form-label">Nome de usuário</label>
-                            <input type="text" name="username" class="form-control {% if form.username.errors %}is-invalid{% endif %}" id="id_username" value="{{ form.username.value }}">
+                            <input type="text" name="username" class="form-control {% if form.username.errors %}is-invalid{% endif %}" id="id_username" value="{{ form.username.value|default:'' }}">
                             {% if form.username.errors %}
                                 <div class="invalid-feedback">
                                     {% for error in form.username.errors %}
@@ -27,7 +27,7 @@
 
                         <div class="mb-3">
                             <label for="id_email" class="form-label">E-mail</label>
-                            <input type="email" name="email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" id="id_email" value="{{ form.email.value }}">
+                            <input type="email" name="email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" id="id_email" value="{{ form.email.value|default:'' }}">
                             {% if form.email.errors %}
                                 <div class="invalid-feedback">
                                     {% for error in form.email.errors %}
@@ -40,7 +40,7 @@
                         <!-- Campos adicionais -->
                         <div class="mb-3">
                             <label for="id_nome" class="form-label">Nome Completo</label>
-                            <input type="text" name="nome" class="form-control {% if form.nome.errors %}is-invalid{% endif %}" id="id_nome" value="{{ form.nome.value }}">
+                            <input type="text" name="nome" class="form-control {% if form.nome.errors %}is-invalid{% endif %}" id="id_nome" value="{{ form.nome.value|default:'' }}">
                             {% if form.nome.errors %}
                                 <div class="invalid-feedback">
                                     {% for error in form.nome.errors %}
@@ -52,7 +52,7 @@
 
                         <div class="mb-3">
                             <label for="id_cpf" class="form-label">CPF</label>
-                            <input type="text" name="cpf" class="form-control {% if form.cpf.errors %}is-invalid{% endif %}" id="id_cpf" value="{{ form.cpf.value }}">
+                            <input type="text" name="cpf" class="form-control {% if form.cpf.errors %}is-invalid{% endif %}" id="id_cpf" value="{{ form.cpf.value|default:'' }}">
                             {% if form.cpf.errors %}
                                 <div class="invalid-feedback">
                                     {% for error in form.cpf.errors %}
@@ -76,7 +76,7 @@
 
                         <div class="mb-3">
                             <label for="id_cargo" class="form-label">Cargo</label>
-                            <input type="text" name="cargo" class="form-control {% if form.cargo.errors %}is-invalid{% endif %}" id="id_cargo" value="{{ form.cargo.value }}">
+                            <input type="text" name="cargo" class="form-control {% if form.cargo.errors %}is-invalid{% endif %}" id="id_cargo" value="{{ form.cargo.value|default:'' }}">
                             {% if form.cargo.errors %}
                                 <div class="invalid-feedback">
                                     {% for error in form.cargo.errors %}
