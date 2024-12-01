@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LoginView
-from .views import HomeView
+from .views import HomeView, categorias_de_gastos, gastos_por_dia
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("", LoginView.as_view(), name="login"),
     path("home/", HomeView.as_view(), name="home"),
+    
+    path('gastos-por-dia/', gastos_por_dia, name='gastos_por_dia'),
+    path('categorias-de-gastos/', categorias_de_gastos, name='categorias_de_gastos'),
 ]

@@ -47,6 +47,108 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Gastos dos últimos 7 dias</h4>
+                        <canvas id="gastosPorDia" width="600" height="400"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Categorias de gastos</h4>
+                        <canvas id="categoriasGastos" width="600" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        
+            <script>
+                // Função para carregar dados via AJAX e renderizar o gráfico
+                async function carregarGrafico(url, config) {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    config.data.labels = data.labels;
+                    config.data.datasets[0].data = data.data;
+                    const ctx = document.getElementById(config.id).getContext('2d');
+                    new Chart(ctx, config);
+                }
+            
+                // Configurações do gráfico de linhas com formatação de dinheiro
+                const configLinha = {
+                    id: "gastosPorDia",
+                    type: "line",
+                    data: {
+                        labels: [], // Preenchido via AJAX
+                        datasets: [{
+                            label: "Gasto do Dia",
+                            data: [], // Preenchido via AJAX
+                            borderColor: "rgba(75, 192, 192, 1)",
+                            backgroundColor: "rgba(75, 192, 192, 0.2)",
+                            tension: 0.4, // Suaviza as linhas
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: false,
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            },
+                            datalabels: {
+                                align: 'top',
+                                formatter: function(value, context) {
+                                    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                                },
+                                font: {
+                                    weight: 'bold',
+                                    size: 12
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    plugins: [ChartDataLabels]
+                };
+            
+                // Configurações do gráfico de pizza (sem alteração)
+                const configPizza = {
+                    id: "categoriasGastos",
+                    type: "pie",
+                    data: {
+                        labels: [], // Preenchido via AJAX
+                        datasets: [{
+                            label: "Quantidade",
+                            data: [], // Preenchido via AJAX
+                            backgroundColor: [
+                                "rgba(255, 99, 132, 0.6)",
+                                "rgba(54, 162, 235, 0.6)",
+                                "rgba(255, 206, 86, 0.6)",
+                                "rgba(75, 192, 192, 0.6)",
+                                "rgba(153, 102, 255, 0.6)"
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: false,
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            },
+                        }
+                    }
+                };
+            
+                // Carregar os gráficos
+                carregarGrafico('/gastos-por-dia/', configLinha);
+                carregarGrafico('/categorias-de-gastos/', configPizza);
+            </script>
         </div>
     </div>
 </div>
